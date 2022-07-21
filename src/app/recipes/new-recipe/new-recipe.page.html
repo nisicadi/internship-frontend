@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>New recipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Recipe id</ion-label>
+    <ion-input type="text" [(ngModel)]="id"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Recipe name</ion-label>
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Recipe image url</ion-label>
+  <ion-input type="text" [(ngModel)]="url"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Recipe ingredient</ion-label>
+  <ion-input type="text" [(ngModel)]="ingredients"></ion-input>
+</ion-item>
+<div class="ion-margin">
+<ion-button href="/recipes"><ion-icon name="close-outline"></ion-icon></ion-button>
+<ion-button (click)="saveRecipe()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
+</div>
+</ion-content>

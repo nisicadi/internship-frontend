@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit recipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Recipe name</ion-label>
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Recipe image url</ion-label>
+  <ion-input type="text" [(ngModel)]="url"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Recipe ingredient</ion-label>
+  <ion-input type="text" [(ngModel)]="ingredients"></ion-input>
+</ion-item>
+<div class="ion-margin">
+<ion-button href="/recipes"><ion-icon name="close-outline"></ion-icon></ion-button>
+<ion-button (click)="saveChanges()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
+</div>
+</ion-content>
