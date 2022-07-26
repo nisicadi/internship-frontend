@@ -18,7 +18,9 @@ export class RecipesPage implements OnInit {
 
   //Fix za delete, iz youtube komentara
   ionViewWillEnter() {
-    this.recipes = this.recipesService.getAllRecipes();
+    this.recipesService.getAllRecipes().subscribe(res => {
+      this.recipes = res;
+    });
   }
 
 }

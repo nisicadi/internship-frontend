@@ -39,7 +39,7 @@ export class NewRecipePage implements OnInit {
       return;
     }
 
-    this.recipeService.addRecipe(this.id, this.name, this.url, this.ingredients);
+    //this.recipeService.addRecipe(this.id, this.name, this.url, this.ingredients);
     this.router.navigate(['/recipes']);
 
 }

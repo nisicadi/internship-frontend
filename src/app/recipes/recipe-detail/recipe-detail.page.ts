@@ -28,7 +28,7 @@ export class RecipeDetailPage implements OnInit {
       }
 
       const recipeId = paraMap.get('recipeId');
-      this.loadedRecipe = this.recipeService.getRecipe(recipeId);
+      //this.loadedRecipe = this.recipeService.getRecipe(recipeId);
     });
   }
 
@@ -43,7 +43,7 @@ export class RecipeDetailPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-          this.recipeService.deleteRecipe(this.loadedRecipe.id);
+          this.recipeService.deleteRecipe(this.loadedRecipe.recipeId);
           this.router.navigate(['/recipes']);
         }
       }
@@ -54,7 +54,7 @@ export class RecipeDetailPage implements OnInit {
   }
 
   editRecipe() {
-    this.router.navigate(['/recipes/'+this.loadedRecipe.id+'/edit-recipe']);
+    this.router.navigate(['/recipes/'+this.loadedRecipe.recipeId+'/edit-recipe']);
   }
 
 }

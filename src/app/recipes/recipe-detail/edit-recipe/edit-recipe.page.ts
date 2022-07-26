@@ -31,18 +31,17 @@ export class EditRecipePage implements OnInit {
       }
 
       const recipeId = paraMap.get('recipeId');
-      this.loadedRecipe = this.recipeService.getRecipe(recipeId);
+      //this.loadedRecipe = this.recipeService.getRecipe(recipeId);
     });
 
-    this.name= this.loadedRecipe.title;
+    this.name= this.loadedRecipe.recipeTitle;
     this.url= this.loadedRecipe.imageUrl;
-    this.ingredients= this.loadedRecipe.ingredients[0];
-    //Samo prvi sastojak, jer nisam dobro implementirao niz ni kod dodavanja novog recepta.
+    this.ingredients= this.loadedRecipe.recipeIngredients;
   }
 
   saveChanges() {
-    this.recipeService.updateRecipe(this.loadedRecipe.id, this.name, this.url, this.ingredients);
-    this.router.navigate(['/recipes/'+this.loadedRecipe.id]);
+    // this.recipeService.updateRecipe(this.loadedRecipe.id, this.name, this.url, this.ingredients);
+    // this.router.navigate(['/recipes/'+this.loadedRecipe.id]);
   }
 
 }
