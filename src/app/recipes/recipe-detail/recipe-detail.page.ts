@@ -19,17 +19,19 @@ export class RecipeDetailPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(paraMap => {
-      if(!paraMap.has('recipeId'))
-      {
-        //redirect
-        this.router.navigate(['/recipes']);
-        return;
-      }
+    this.activatedRoute.url.subscribe(url =>{
+      this.activatedRoute.paramMap.subscribe(paraMap => {
+        if(!paraMap.has('recipeId'))
+        {
+          //redirect
+          this.router.navigate(['/recipes']);
+          return;
+        }
 
-      const recipeId = paraMap.get('recipeId');
-      this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
-        this.loadedRecipe = res;
+        const recipeId = paraMap.get('recipeId');
+        this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
+          this.loadedRecipe = res;
+        });
       });
     });
   }
