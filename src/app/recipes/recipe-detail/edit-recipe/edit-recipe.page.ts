@@ -31,17 +31,28 @@ export class EditRecipePage implements OnInit {
       }
 
       const recipeId = paraMap.get('recipeId');
-      //this.loadedRecipe = this.recipeService.getRecipe(recipeId);
-    });
+      this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
+        this.loadedRecipe = res;
 
-    this.name= this.loadedRecipe.recipeTitle;
-    this.url= this.loadedRecipe.imageUrl;
-    this.ingredients= this.loadedRecipe.recipeIngredients;
+        this.name = this.loadedRecipe?.recipeTitle;
+        this.url = this.loadedRecipe?.imageUrl;
+        this.ingredients = this.loadedRecipe?.recipeIngredients;
+    });
+  });
   }
 
   saveChanges() {
-    // this.recipeService.updateRecipe(this.loadedRecipe.id, this.name, this.url, this.ingredients);
-    // this.router.navigate(['/recipes/'+this.loadedRecipe.id]);
+    if(this.name.trim().length <=0 || this.url.trim().length <= 0 || this.ingredients.trim().length <=0)
+    {
+      return;
+    }
+
+    this.loadedRecipe.recipeTitle = this.name;
+    this.loadedRecipe.imageUrl = this.url;
+    this.loadedRecipe.recipeIngredients = this.ingredients;
+
+    this.recipeService.updateRecipe(this.loadedRecipe).subscribe();
+    this.router.navigate(['/recipes']);
   }
 
 }
