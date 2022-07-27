@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/recipes"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{loadedRecipe.recipeTitle}}</ion-title>
+    <ion-title>{{loadedRecipe?.recipeTitle}}</ion-title>
     <ion-buttons slot="primary">
         <ion-button (click)="editRecipe()"><ion-icon name="pencil-outline"></ion-icon></ion-button>
         <ion-button (click)="deleteRecipe()">
@@ -16,17 +16,17 @@
 <ion-content>
   <ion-grid class="ion-no-padding">
     <ion-row>
-      <ion-col class="ion-no-padding"><ion-img style="object-fit:fill; height:400px; width:100%;" [src]="loadedRecipe.imageUrl"></ion-img></ion-col>
+      <ion-col class="ion-no-padding"><ion-img style="object-fit:fill; height:400px; width:100%;" [src]="loadedRecipe?.imageUrl"></ion-img></ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <h1 class="ion-text-center">{{loadedRecipe.recipeTitle}}</h1>
+        <h1 class="ion-text-center">{{loadedRecipe?.recipeTitle}}</h1>
       </ion-col>
     </ion-row>
     <ion-row>
      <ion-col>
       <ion-list>
-        <h1 class="ion-text-center">{{loadedRecipe.recipeIngredients}}</h1>
+        <h1 class="ion-text-center">{{loadedRecipe?.recipeIngredients}}</h1>
       </ion-list>
      </ion-col>
     </ion-row>
