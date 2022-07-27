@@ -52,7 +52,7 @@ export class EditRecipePage implements OnInit {
     this.loadedRecipe.recipeIngredients = this.ingredients;
 
     this.recipeService.updateRecipe(this.loadedRecipe).subscribe();
-    this.router.navigate(['/recipes']);
+    this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
   }
 
 }
