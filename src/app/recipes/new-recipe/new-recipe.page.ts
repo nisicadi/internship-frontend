@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { RecipesService } from '../recipes.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Recipe } from '../recipe.model';
 
 
 @Component({
@@ -10,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./new-recipe.page.scss'],
 })
 export class NewRecipePage implements OnInit {
-  id: string;
   name: string;
   url: string;
   ingredients: string;
@@ -25,7 +25,7 @@ export class NewRecipePage implements OnInit {
   }
 
   saveRecipe() {
-    if(this.name.trim().length <=0 || this.url.trim().length <= 0 || this.ingredients.trim().length <=0 || this.id.trim().length <= 0)
+    if(this.name.trim().length <=0 || this.url.trim().length <= 0 || this.ingredients.trim().length <=0)
     {
       //Ne radi
       this.alertCtrl.create({
@@ -39,7 +39,14 @@ export class NewRecipePage implements OnInit {
       return;
     }
 
-    //this.recipeService.addRecipe(this.id, this.name, this.url, this.ingredients);
+    const newRecipe: Recipe ={
+          recipeId: 0,
+          recipeTitle: this.name,
+          imageUrl: this.url,
+          recipeIngredients: this.ingredients
+        };
+
+    this.recipeService.addRecipe(newRecipe).subscribe();
     this.router.navigate(['/recipes']);
 
 }

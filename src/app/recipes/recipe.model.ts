@@ -1,5 +1,5 @@
 export interface Recipe {
-  recipeId: string;
+  recipeId: number;
   recipeTitle: string;
   imageUrl: string;
   recipeIngredients: string;

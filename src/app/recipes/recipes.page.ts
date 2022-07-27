@@ -20,7 +20,7 @@ export class RecipesPage implements OnInit {
   ionViewWillEnter() {
     this.recipesService.getAllRecipes().subscribe(res => {
       this.recipes = res;
+      console.log(res);
     });
   }
-
 }

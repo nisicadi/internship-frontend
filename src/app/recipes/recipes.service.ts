@@ -57,17 +57,18 @@ export class RecipesService {
   getAllRecipes(): Observable<any> {
     return this.http.get(`${this.url}/api/recipes`);
   }
-  getRecipe(recipeId: string){
-    return this.http.get(`${this.url}/api/recipes/${recipeId}`);
+  getRecipe(id: number): Observable<Recipe>{
+    return this.http.get<Recipe>(`${this.url}/api/recipes/${id}`);
   }
 
-  deleteRecipe(recipeId: string){
-    return this.http.delete(`${this.url}/api/recipes/${recipeId}`);
+  deleteRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.delete<Recipe>(`${this.url}/api/recipes/${recipe.recipeId}`);
   }
-  // addRecipe(recipeId: string, recipeName: string, recipeUrl: string, recipeIngredient: string)
-  // {
-  // }
-  // updateRecipe(recipeId: string, recipeName: string, recipeUrl: string, recipeIngredient: string)
-  // {
+  addRecipe(recipe: Recipe): Observable<Recipe> {
+    return this.http.post<Recipe>(`${this.url}/api/recipes`, recipe);
+  }
+
+  // updateRecipe(recipe: Recipe): Observable<any> {
+  //   return this.http.put(`${this.url}/api/recipes/${recipe}`);
   // }
 }

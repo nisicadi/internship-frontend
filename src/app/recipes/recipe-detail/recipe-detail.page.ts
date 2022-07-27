@@ -28,7 +28,11 @@ export class RecipeDetailPage implements OnInit {
       }
 
       const recipeId = paraMap.get('recipeId');
-      //this.loadedRecipe = this.recipeService.getRecipe(recipeId);
+      this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
+        this.loadedRecipe = res;
+        console.log(res);
+        console.log(this.loadedRecipe);
+      });
     });
   }
 
@@ -43,7 +47,7 @@ export class RecipeDetailPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-          this.recipeService.deleteRecipe(this.loadedRecipe.recipeId);
+          this.recipeService.deleteRecipe(this.loadedRecipe).subscribe();
           this.router.navigate(['/recipes']);
         }
       }
