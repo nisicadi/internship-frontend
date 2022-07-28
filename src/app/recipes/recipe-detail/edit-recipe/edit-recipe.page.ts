@@ -54,5 +54,4 @@ export class EditRecipePage implements OnInit {
     this.recipeService.updateRecipe(this.loadedRecipe).subscribe();
     this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
   }
-
 }
