@@ -12,7 +12,7 @@ export class RecipesService {
   constructor(private http: HttpClient) { }
 
   getAllRecipes(): Observable<any> {
-    return this.http.get(`${this.url}/api/recipes`);
+    return this.http.get<any>(`${this.url}/api/recipes`);
   }
   getRecipe(id: number): Observable<Recipe>{
     return this.http.get<Recipe>(`${this.url}/api/recipes/${id}`);
@@ -21,6 +21,7 @@ export class RecipesService {
   deleteRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http.delete<Recipe>(`${this.url}/api/recipes/${recipe.recipeId}`);
   }
+
   addRecipe(recipe: Recipe): Observable<Recipe> {
     return this.http.post<Recipe>(`${this.url}/api/recipes`, recipe);
   }

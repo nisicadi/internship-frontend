@@ -8,23 +8,29 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './recipes.page.html',
   styleUrls: ['./recipes.page.scss'],
 })
+
 export class RecipesPage implements OnInit {
   recipes: Recipe[];
 
   constructor(private recipesService: RecipesService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.recipes = this.recipesService.getAllRecipes();
+    //this.refreshList();
   }
 
-  //Fix za delete, iz youtube komentara
+  //Fix za refresh nakon delete, youtube komentar (vs ngOnInit)
   ionViewWillEnter() {
-    //Fix za refresh nakon dodavanja/brisanja recepata
-    this.activatedRoute.url.subscribe(url =>{
+    console.log('ionViewWillEnter');
+    this.refreshList();
+  }
+
+  refreshList() {
+    //this.activatedRoute.url.subscribe(url =>{
       this.recipesService.getAllRecipes().subscribe(res => {
           this.recipes = res;
           console.log(res);
-  });
-});
-}
+          console.log('refreshList');
+      });
+   // });
+  }
 }
