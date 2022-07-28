@@ -47,8 +47,10 @@ export class RecipeDetailPage implements OnInit {
       {
         text: 'Delete',
         handler: () => {
-          this.recipeService.deleteRecipe(this.loadedRecipe).subscribe();
-          this.router.navigate(['/recipes']);
+          this.recipeService.deleteRecipe(this.loadedRecipe).subscribe(res => {
+            console.log('Delete');
+            this.router.navigate(['/recipes']);
+          });
         }
       }
     ]

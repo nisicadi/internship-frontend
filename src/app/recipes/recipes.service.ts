@@ -11,8 +11,8 @@ export class RecipesService {
 
   constructor(private http: HttpClient) { }
 
-  getAllRecipes(): Observable<any> {
-    return this.http.get<any>(`${this.url}/api/recipes`);
+  getAllRecipes(): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(`${this.url}/api/recipes`);
   }
   getRecipe(id: number): Observable<Recipe>{
     return this.http.get<Recipe>(`${this.url}/api/recipes/${id}`);

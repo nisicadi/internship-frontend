@@ -4,7 +4,6 @@ import { RecipesService } from '../recipes.service';
 import { Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 
-
 @Component({
   selector: 'app-new-recipe',
   templateUrl: './new-recipe.page.html',
@@ -25,9 +24,9 @@ export class NewRecipePage implements OnInit {
   }
 
   saveRecipe() {
-    if(this.name.trim().length <=0 || this.url.trim().length <= 0 || this.ingredients.trim().length <=0)
+    if(!this.name || !this.url || !this.ingredients ||(!this.name.trim() || !this.url.trim() || !this.ingredients.trim()))
     {
-      //Ne radi
+      //Ne radi za prvi klik?
       this.alertCtrl.create({
         header: 'Invalid inputs',
         message: 'Check your inputs and try again.',
@@ -46,8 +45,11 @@ export class NewRecipePage implements OnInit {
           recipeIngredients: this.ingredients
         };
 
-    this.recipeService.addRecipe(newRecipe).subscribe();
-    this.router.navigate(['/recipes']);
+    this.recipeService.addRecipe(newRecipe).subscribe(obj => {
+      console.log('Add');
+      this.router.navigate(['/recipes']);
+    });
+
 
 }
 }

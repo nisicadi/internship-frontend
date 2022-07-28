@@ -6,6 +6,7 @@
 </ion-header>
 
 <ion-content>
+  <ion-searchbar (ionChange)="getSearch()" [(ngModel)]="searchInput"></ion-searchbar>
   <ion-list>
     <app-recipe-item
     *ngFor="let recipe of recipes"

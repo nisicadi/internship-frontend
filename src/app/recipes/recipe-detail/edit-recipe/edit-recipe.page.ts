@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RecipesService } from '../../recipes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../../recipe.model';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-edit-recipe',
@@ -18,7 +20,8 @@ export class EditRecipePage implements OnInit {
   constructor(
     private recipeService: RecipesService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
@@ -42,8 +45,16 @@ export class EditRecipePage implements OnInit {
   }
 
   saveChanges() {
-    if(this.name.trim().length <=0 || this.url.trim().length <= 0 || this.ingredients.trim().length <=0)
+    if(!this.name || !this.url || !this.ingredients ||(!this.name.trim() || !this.url.trim() || !this.ingredients.trim()))
     {
+      this.alertCtrl.create({
+        header: 'Invalid inputs',
+        message: 'Check your inputs and try again.',
+        buttons: ['OK']
+      }).then(alertEl => {
+        alertEl.present();
+      });
+
       return;
     }
 
@@ -51,7 +62,8 @@ export class EditRecipePage implements OnInit {
     this.loadedRecipe.imageUrl = this.url;
     this.loadedRecipe.recipeIngredients = this.ingredients;
 
-    this.recipeService.updateRecipe(this.loadedRecipe).subscribe();
-    this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
+    this.recipeService.updateRecipe(this.loadedRecipe).subscribe(res=>{
+      this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
+    });
   }
 }
