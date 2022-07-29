@@ -50,11 +50,10 @@ export class RecipesPage implements OnInit {
   // }
 
   getSearch() {
-      this.recipes = this.allRecipes;
       this.filteredRecipes = [];
 
       console.log(this.searchInput);
-      this.recipes.forEach(recipe => {
+      this.allRecipes.forEach(recipe => {
         if(recipe.recipeTitle.toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())){
           this.filteredRecipes.push(recipe);
         }
