@@ -24,7 +24,9 @@ export class NewRecipePage implements OnInit {
   }
 
   saveRecipe() {
-    if(!this.name || !this.url || !this.ingredients ||(!this.name.trim() || !this.url.trim() || !this.ingredients.trim()))
+    if(!this.name || !this.url || !this.ingredients ||
+      (!this.name.trim() || !this.url.trim() || !this.ingredients.trim()) ||
+      this.name.length > 255 || this.url.length > 255 || this.ingredients.length > 255)
     {
       //Ne radi za prvi klik?
       this.alertCtrl.create({

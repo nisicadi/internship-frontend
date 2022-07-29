@@ -45,18 +45,20 @@ export class EditRecipePage implements OnInit {
   }
 
   saveChanges() {
-    if(!this.name || !this.url || !this.ingredients ||(!this.name.trim() || !this.url.trim() || !this.ingredients.trim()))
-    {
-      this.alertCtrl.create({
-        header: 'Invalid inputs',
-        message: 'Check your inputs and try again.',
-        buttons: ['OK']
-      }).then(alertEl => {
-        alertEl.present();
-      });
+      if(!this.name || !this.url || !this.ingredients ||
+        (!this.name.trim() || !this.url.trim() || !this.ingredients.trim()) ||
+        this.name.length > 255 || this.url.length > 255 || this.ingredients.length > 255)
+      {
+        this.alertCtrl.create({
+          header: 'Invalid inputs',
+          message: 'Check your inputs and try again.',
+          buttons: ['OK']
+        }).then(alertEl => {
+          alertEl.present();
+        });
 
-      return;
-    }
+        return;
+      }
 
     this.loadedRecipe.recipeTitle = this.name;
     this.loadedRecipe.imageUrl = this.url;
