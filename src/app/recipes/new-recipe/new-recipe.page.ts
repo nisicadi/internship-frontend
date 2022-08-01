@@ -3,6 +3,9 @@ import { AlertController } from '@ionic/angular';
 import { RecipesService } from '../recipes.service';
 import { Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
+import { CategoryService } from '../categories.service';
+import { Category } from '../category.model';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-new-recipe',
@@ -13,14 +16,20 @@ export class NewRecipePage implements OnInit {
   name: string;
   url: string;
   ingredients: string;
+  categories: Category[];
+  selectedCategory: Category;
 
   constructor(
     private alertCtrl: AlertController,
     private recipeService: RecipesService,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
     ) {   }
 
   ngOnInit() {
+    this.categoryService.getAllCategories().subscribe(res=>{
+      this.categories = res;
+    });
   }
 
   saveRecipe() {
@@ -39,19 +48,26 @@ export class NewRecipePage implements OnInit {
 
       return;
     }
+    this.categoryService.getCategory(this.selectedCategory?.categoryId).subscribe(res=>{
+      const newRecipe: Recipe ={
+        recipeId: 0,
+        recipeTitle: this.name,
+        imageUrl: this.url,
+        recipeIngredients: this.ingredients,
+        categoryId: res.categoryId,
+        category: res
+      };
 
-    const newRecipe: Recipe ={
-          recipeId: 0,
-          recipeTitle: this.name,
-          imageUrl: this.url,
-          recipeIngredients: this.ingredients
-        };
-
-    this.recipeService.addRecipe(newRecipe).subscribe(obj => {
-      console.log('Add');
-      this.router.navigate(['/recipes']);
+      this.recipeService.addRecipe(newRecipe).subscribe(obj => {
+        console.log('Add');
+        this.router.navigate(['/recipes']);
+      });
     });
+    }
 
-
-}
+    categoryChanged(ev){
+      console.log(ev);
+      this.selectedCategory = ev.target.value;
+      console.log(this.selectedCategory);
+    }
 }

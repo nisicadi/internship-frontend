@@ -3,6 +3,8 @@ import { RecipesService } from '../../recipes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../../recipe.model';
 import { AlertController } from '@ionic/angular';
+import { CategoryService } from '../../categories.service';
+import { Category } from '../../category.model';
 
 
 @Component({
@@ -14,6 +16,8 @@ export class EditRecipePage implements OnInit {
   name: string;
   url: string;
   ingredients: string;
+  categories: Category[];
+  selectedCategory: Category;
 
   loadedRecipe: Recipe;
 
@@ -21,7 +25,8 @@ export class EditRecipePage implements OnInit {
     private recipeService: RecipesService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit() {
@@ -41,6 +46,9 @@ export class EditRecipePage implements OnInit {
         this.url = this.loadedRecipe?.imageUrl;
         this.ingredients = this.loadedRecipe?.recipeIngredients;
     });
+  });
+  this.categoryService.getAllCategories().subscribe(res=>{
+    this.categories = res;
   });
   }
 
@@ -63,9 +71,25 @@ export class EditRecipePage implements OnInit {
     this.loadedRecipe.recipeTitle = this.name;
     this.loadedRecipe.imageUrl = this.url;
     this.loadedRecipe.recipeIngredients = this.ingredients;
+    this.categoryService.getCategory(this.selectedCategory?.categoryId).subscribe(res=>{
+      this.loadedRecipe.category = res;
+      this.loadedRecipe.categoryId = res.categoryId;
 
-    this.recipeService.updateRecipe(this.loadedRecipe).subscribe(res=>{
-      this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
+      this.recipeService.updateRecipe(this.loadedRecipe).subscribe(res2=>{
+        this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
+      });
     });
+    // this.loadedRecipe.categoryId = this.selectedCategory?.categoryId;
+    // this.loadedRecipe.category = this.selectedCategory;
+
+    // this.recipeService.updateRecipe(this.loadedRecipe).subscribe(res=>{
+    //   this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
+    // });
+  }
+
+  categoryChanged(ev){
+    console.log('Test categoryChanged');
+    this.selectedCategory = ev.target.value;
+    console.log(this.selectedCategory);
   }
 }

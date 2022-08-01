@@ -7,6 +7,10 @@
 
 <ion-content>
   <ion-searchbar (ionChange)="getSearch()" [(ngModel)]="searchInput"></ion-searchbar>
+  <app-category-chip 
+    *ngFor="let category of categories" 
+    [categoryItem]="category">
+  </app-category-chip>
   <ion-list>
     <app-recipe-item
     *ngFor="let recipe of recipes"

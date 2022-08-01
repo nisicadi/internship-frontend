@@ -20,6 +20,11 @@
   <ion-label position="floating">Recipe ingredient</ion-label>
   <ion-input type="text" [(ngModel)]="ingredients"></ion-input>
 </ion-item>
+<ion-select placeholder="Select category" (ionChange)="categoryChanged($event)">
+  <ion-select-option 
+  *ngFor="let category of categories"
+   [value]="category">{{category?.categoryName}}</ion-select-option>
+</ion-select>
 <div class="ion-margin">
 <ion-button href="/recipes"><ion-icon name="close-outline"></ion-icon></ion-button>
 <ion-button (click)="saveChanges()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
