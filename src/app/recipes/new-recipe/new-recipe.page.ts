@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { CategoryService } from '../categories.service';
 import { Category } from '../category.model';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-new-recipe',
@@ -59,15 +58,12 @@ export class NewRecipePage implements OnInit {
       };
 
       this.recipeService.addRecipe(newRecipe).subscribe(obj => {
-        console.log('Add');
         this.router.navigate(['/recipes']);
       });
     });
     }
 
     categoryChanged(ev){
-      console.log(ev);
       this.selectedCategory = ev.target.value;
-      console.log(this.selectedCategory);
     }
 }

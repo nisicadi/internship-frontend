@@ -14,7 +14,6 @@ import { CategoryService } from './categories.service';
 export class RecipesPage implements OnInit {
   recipes: Recipe[];
   categories: Category[];
-  filteredRecipes: Recipe[];
   allRecipes: Recipe[];
   searchInput: string;
   lastCategory: Category;
@@ -46,15 +45,12 @@ export class RecipesPage implements OnInit {
   }
 
   getSearch() {
-      this.filteredRecipes = [];
+      this.recipes = [];
 
-      console.log(this.searchInput);
       this.allRecipes.forEach(recipe => {
         if(recipe.recipeTitle.toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())){
-          this.filteredRecipes.push(recipe);
+          this.recipes.push(recipe);
         }
-
-      this.recipes = this.filteredRecipes;
     });
   }
 
@@ -63,15 +59,11 @@ export class RecipesPage implements OnInit {
       this.refreshList();
     }
     else{
-      this.filteredRecipes = [];
-
-      console.log(this.searchInput);
+      this.recipes = [];
       this.allRecipes.forEach(recipe => {
         if(recipe.categoryId === category.categoryId){
-          this.filteredRecipes.push(recipe);
+          this.recipes.push(recipe);
         }
-
-      this.recipes = this.filteredRecipes;
       this.lastCategory = category;
     });
     }

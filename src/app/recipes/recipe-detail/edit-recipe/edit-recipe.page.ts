@@ -47,7 +47,6 @@ export class EditRecipePage implements OnInit {
         this.url = this.loadedRecipe?.imageUrl;
         this.ingredients = this.loadedRecipe?.recipeIngredients;
         this.cat = this.loadedRecipe?.categoryId;
-        console.log(this.loadedRecipe?.categoryId);
     });
   });
   this.categoryService.getAllCategories().subscribe(res=>{
@@ -85,8 +84,6 @@ export class EditRecipePage implements OnInit {
   }
 
   categoryChanged(ev){
-    console.log('Test categoryChanged');
     this.selectedCategory = ev.target.value;
-    console.log(ev.target.value);
   }
 }

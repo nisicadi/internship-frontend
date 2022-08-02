@@ -14,7 +14,6 @@ export class CategoryChipComponent implements OnInit {
   ngOnInit(): void {}
 
   filterByCategory(category: Category){
-    console.log(category);
     this.recipesPage.filterByCategory(category);
   }
 }
