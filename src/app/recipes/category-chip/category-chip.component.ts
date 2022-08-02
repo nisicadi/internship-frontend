@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Category } from '../category.model';
+import { RecipesPage } from '../recipes.page';
 
 @Component({
   selector: 'app-category-chip',
@@ -8,8 +9,12 @@ import { Category } from '../category.model';
 })
 export class CategoryChipComponent implements OnInit {
   @Input() categoryItem: Category;
-  constructor() { }
+  constructor(private recipesPage: RecipesPage) { }
 
   ngOnInit(): void {}
 
+  filterByCategory(category: Category){
+    console.log(category);
+    this.recipesPage.filterByCategory(category);
+  }
 }

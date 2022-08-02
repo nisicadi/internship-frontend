@@ -18,6 +18,7 @@ export class EditRecipePage implements OnInit {
   ingredients: string;
   categories: Category[];
   selectedCategory: Category;
+  cat: number;
 
   loadedRecipe: Recipe;
 
@@ -45,6 +46,8 @@ export class EditRecipePage implements OnInit {
         this.name = this.loadedRecipe?.recipeTitle;
         this.url = this.loadedRecipe?.imageUrl;
         this.ingredients = this.loadedRecipe?.recipeIngredients;
+        this.cat = this.loadedRecipe?.categoryId;
+        console.log(this.loadedRecipe?.categoryId);
     });
   });
   this.categoryService.getAllCategories().subscribe(res=>{
@@ -79,17 +82,11 @@ export class EditRecipePage implements OnInit {
         this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
       });
     });
-    // this.loadedRecipe.categoryId = this.selectedCategory?.categoryId;
-    // this.loadedRecipe.category = this.selectedCategory;
-
-    // this.recipeService.updateRecipe(this.loadedRecipe).subscribe(res=>{
-    //   this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
-    // });
   }
 
   categoryChanged(ev){
     console.log('Test categoryChanged');
     this.selectedCategory = ev.target.value;
-    console.log(this.selectedCategory);
+    console.log(ev.target.value);
   }
 }

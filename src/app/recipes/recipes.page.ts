@@ -17,6 +17,7 @@ export class RecipesPage implements OnInit {
   filteredRecipes: Recipe[];
   allRecipes: Recipe[];
   searchInput: string;
+  lastCategory: Category;
 
   constructor(private recipesService: RecipesService, private activatedRoute: ActivatedRoute, private categoryService: CategoryService) { }
 
@@ -40,7 +41,7 @@ export class RecipesPage implements OnInit {
     this.recipesService.getAllRecipes().subscribe(res => {
       this.allRecipes = res;
       this.recipes = res;
-      console.log(res);
+      this.lastCategory = null;
     });
   }
 
@@ -57,14 +58,22 @@ export class RecipesPage implements OnInit {
     });
   }
 
-  filterByCategoryId(category: Category){
-    this.filteredRecipes = [];
-    this.allRecipes.forEach(recipe =>{
-      if(recipe.category === category){
-        this.filteredRecipes.push(recipe);
-      }
-    });
+  filterByCategory(category: Category){
+    if(this.lastCategory === category){
+      this.refreshList();
+    }
+    else{
+      this.filteredRecipes = [];
 
-    this.recipes = this.filteredRecipes;
+      console.log(this.searchInput);
+      this.allRecipes.forEach(recipe => {
+        if(recipe.categoryId === category.categoryId){
+          this.filteredRecipes.push(recipe);
+        }
+
+      this.recipes = this.filteredRecipes;
+      this.lastCategory = category;
+    });
+    }
   }
 }
