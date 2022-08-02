@@ -25,7 +25,6 @@ export class RecipesPage implements OnInit {
 
   //Fix za refresh nakon delete, youtube komentar (vs ngOnInit)
   ionViewWillEnter() {
-    console.log('ionViewWillEnter');
     this.refreshList();
     this.refreshCategories();
   }
