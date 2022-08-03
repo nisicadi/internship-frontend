@@ -21,12 +21,11 @@
         <h1 class="ion-text-center">{{loadedRecipe?.recipeTitle}}</h1>
       </ion-col>
     </ion-row>
-    <ion-row>
-     <ion-col>
-      <ion-list>
-        <h1 class="ion-text-center">{{loadedRecipe?.recipeIngredients}}</h1>
-      </ion-list>
-     </ion-col>
-    </ion-row>
+    <ion-col>
+      <h1 class="ion-text-center">Ingredients:</h1>
+      <ion-item *ngFor="let ing of loadedRecipe?.ingredients">
+        <ion-label>{{ing?.ingredientName}}</ion-label>
+      </ion-item>
+    </ion-col>
   </ion-grid>
 </ion-content>

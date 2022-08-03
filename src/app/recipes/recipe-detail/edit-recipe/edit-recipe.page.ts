@@ -15,7 +15,6 @@ import { Category } from '../../category.model';
 export class EditRecipePage implements OnInit {
   name: string;
   url: string;
-  ingredients: string;
   categories: Category[];
   selectedCategory: Category;
   cat: number;
@@ -45,7 +44,6 @@ export class EditRecipePage implements OnInit {
 
         this.name = this.loadedRecipe?.recipeTitle;
         this.url = this.loadedRecipe?.imageUrl;
-        this.ingredients = this.loadedRecipe?.recipeIngredients;
         this.cat = this.loadedRecipe?.categoryId;
     });
   });
@@ -55,9 +53,9 @@ export class EditRecipePage implements OnInit {
   }
 
   saveChanges() {
-      if(!this.name || !this.url || !this.ingredients ||
-        (!this.name.trim() || !this.url.trim() || !this.ingredients.trim()) ||
-        this.name.length > 255 || this.url.length > 255 || this.ingredients.length > 255)
+      if(!this.name || !this.url ||
+        (!this.name.trim() || !this.url.trim()) ||
+        this.name.length > 255 || this.url.length > 255)
       {
         this.alertCtrl.create({
           header: 'Invalid inputs',
@@ -72,7 +70,6 @@ export class EditRecipePage implements OnInit {
 
     this.loadedRecipe.recipeTitle = this.name;
     this.loadedRecipe.imageUrl = this.url;
-    this.loadedRecipe.recipeIngredients = this.ingredients;
     this.categoryService.getCategory(this.selectedCategory?.categoryId).subscribe(res=>{
       this.loadedRecipe.category = res;
       this.loadedRecipe.categoryId = res.categoryId;
