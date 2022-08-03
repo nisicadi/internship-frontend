@@ -54,9 +54,13 @@
 
   <div class="ion-margin">
     <ion-label position="floating">Ingredients:</ion-label>
+    <ion-item>
+      <ion-label>Ingredient name:</ion-label>
+      <ion-label>Ingredient quantity:</ion-label>
+    </ion-item>
     <ion-item *ngFor="let ing of ingredients">
-      <ion-label>{{ing?.ingredientName}}</ion-label>
-      <ion-label>{{ing?.quantity}}</ion-label>
+      <ion-label class="ion-margin">{{ing?.ingredientName}}</ion-label>
+      <ion-label class="ion-margin">{{ing?.quantity}}</ion-label>
     </ion-item>
   </div>
 

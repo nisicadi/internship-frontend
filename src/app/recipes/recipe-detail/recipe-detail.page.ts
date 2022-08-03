@@ -63,4 +63,12 @@ export class RecipeDetailPage implements OnInit {
     this.router.navigate(['/recipes/'+this.loadedRecipe.recipeId+'/edit-recipe']);
   }
 
+  editIngredient() {
+    //
+  }
+
+  deleteIngredient() {
+    //
+  }
+
 }

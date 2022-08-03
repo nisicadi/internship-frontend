@@ -22,10 +22,17 @@
       </ion-col>
     </ion-row>
     <ion-col>
-      <h1 class="ion-text-center">Ingredients:</h1>
+      <h1 class="ion-margin">Ingredients:</h1>
+      <ion-item>
+        <ion-label>Ingredient name:</ion-label>
+        <ion-label>Ingredient quantity:</ion-label>
+      </ion-item>
       <ion-item *ngFor="let ing of loadedRecipe?.ingredients">
-        <ion-label>{{ing?.ingredientName}}</ion-label>
-        </ion-item>
+        <ion-label class="ion-margin">{{ing?.ingredientName}}</ion-label>
+        <ion-label class="ion-margin">{{ing?.quantity}}</ion-label>
+        <ion-button (click)="editIngredient()"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+        <ion-button (click)="deleteIngredient()"><ion-icon name="trash" slot="icon-only"></ion-icon></ion-button>
+      </ion-item>
     </ion-col>
   </ion-grid>
 </ion-content>
