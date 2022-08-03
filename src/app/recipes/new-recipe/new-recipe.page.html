@@ -8,11 +8,22 @@
   <ion-item>
     <ion-label position="floating">Recipe name</ion-label>
     <ion-input type="text" [(ngModel)]="recipeName"></ion-input>
-</ion-item>
-<ion-item>
-  <ion-label position="floating">Recipe image url</ion-label>
-  <ion-input type="text" [(ngModel)]="recipeName"></ion-input>
-</ion-item>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Recipe image url</ion-label>
+    <ion-input type="text" [(ngModel)]="recipeName"></ion-input>
+  </ion-item>
+  
+  <ion-list>
+    <ion-item>
+      <ion-label>Category:</ion-label>
+      <ion-select placeholder="Select category" (ionChange)="categoryChanged($event)" [(ngModel)]="cat">
+        <ion-select-option 
+        *ngFor="let category of categories"
+         [value]="category?.categoryId">{{category?.categoryName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
   
   <ion-button expand="block" (click)="setOpen(true)">Add ingredient</ion-button>
   <ion-modal [isOpen]="isModalOpen">
@@ -41,21 +52,14 @@
     </ng-template>
   </ion-modal>
 
+  <div class="ion-margin">
     <ion-label position="floating">Ingredients:</ion-label>
     <ion-item *ngFor="let ing of ingredients">
       <ion-label>{{ing?.ingredientName}}</ion-label>
       <ion-label>{{ing?.quantity}}</ion-label>
     </ion-item>
+  </div>
 
-<ion-list>
-  <ion-item>
-    <ion-select placeholder="Select category" (ionChange)="categoryChanged($event)">
-      <ion-select-option 
-      *ngFor="let category of categories"
-       [value]="category.categoryId">{{category?.categoryName}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-</ion-list>
 <div class="ion-margin">
 <ion-button (click)="discardChanges()"><ion-icon name="close-outline"></ion-icon></ion-button>
 <ion-button (click)="saveChanges()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
