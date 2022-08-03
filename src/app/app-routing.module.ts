@@ -22,16 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'new-recipe',
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./recipes/new-recipe/new-recipe.module').then( m => m.NewRecipePageModule)
-      },
-      {
-        path: ':recipeId',
-        loadChildren: () => import('./recipes/new-recipe/new-recipe.module').then( m => m.NewRecipePageModule)
-      }
-    ]
+    loadChildren: () => import('./recipes/new-recipe/new-recipe.module').then( m => m.NewRecipePageModule)
   }
 ];
 

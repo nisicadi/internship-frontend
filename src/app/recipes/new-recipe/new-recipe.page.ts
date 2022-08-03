@@ -13,6 +13,7 @@ import { Ingredient } from '../ingredient.model';
   styleUrls: ['./new-recipe.page.scss'],
 })
 export class NewRecipePage implements OnInit {
+  pageTitle: string;
   recipeName: string;
   recipeUrl: string;
   ingName: string;
@@ -43,12 +44,14 @@ export class NewRecipePage implements OnInit {
       if(!paraMap.has('recipeId'))
       {
         //Add new recipe
-        this.isEditPage=false;
+        this.pageTitle = 'Add recipe';
+        this.isEditPage = false;
         this.loadedRecipe = null;
       }
       else{
         //Edit existing recipe
-        this.isEditPage=true;
+        this.pageTitle = 'Edit recipe';
+        this.isEditPage = true;
         const recipeId = paraMap.get('recipeId');
         this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
           this.loadedRecipe = res;
@@ -67,6 +70,11 @@ export class NewRecipePage implements OnInit {
     this.isModalOpen = isOpen;
   }
 
+  discardChanges() {
+    console.log('testRouter');
+    this.router.navigate(['../']);
+  }
+
   saveChanges() {
       //Validate input values
       if(!this.recipeName || !this.recipeUrl ||
@@ -83,23 +91,6 @@ export class NewRecipePage implements OnInit {
 
         return;
       }
-
-    // if(this.isEditPage){
-    //   //Edit existing object
-    //   this.loadedRecipe.recipeTitle = this.recipeName;
-    //   this.loadedRecipe.imageUrl = this.recipeName;
-    //   this.categoryService.getCategory(this.selectedCategory?.categoryId).subscribe(res=>{
-    //     this.loadedRecipe.category = res;
-    //     this.loadedRecipe.categoryId = res.categoryId;
-
-    //     this.recipeService.updateRecipe(this.loadedRecipe).subscribe(res2=>{
-    //       this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
-    //     });
-    //   });
-    // }
-    // else{
-    //   //Create new object
-    // }
 
     this.loadedRecipe.recipeTitle = this.recipeName;
     this.loadedRecipe.imageUrl = this.recipeName;

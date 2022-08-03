@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>New recipe</ion-title>
+    <ion-title>{{pageTitle}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -57,7 +57,7 @@
   </ion-item>
 </ion-list>
 <div class="ion-margin">
-<ion-button href="/recipes"><ion-icon name="close-outline"></ion-icon></ion-button>
+<ion-button (click)="discardChanges()"><ion-icon name="close-outline"></ion-icon></ion-button>
 <ion-button (click)="saveChanges()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
 </div>
 </ion-content>
