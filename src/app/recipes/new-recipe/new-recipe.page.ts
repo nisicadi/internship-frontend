@@ -44,7 +44,6 @@ export class NewRecipePage implements OnInit {
       (!this.name.trim() || !this.url.trim() ||
       this.name.length > 255 || this.url.length > 255))
     {
-      //Ne radi za prvi klik?
       this.alertCtrl.create({
         header: 'Invalid inputs',
         message: 'Check your inputs and try again.',
