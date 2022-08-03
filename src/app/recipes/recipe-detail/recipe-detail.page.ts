@@ -60,7 +60,7 @@ export class RecipeDetailPage implements OnInit {
   }
 
   editRecipe() {
-    this.router.navigate(['/recipes/'+this.loadedRecipe.recipeId+'/edit-recipe']);
+    this.router.navigate(['/new-recipe/'+this.loadedRecipe.recipeId]);
   }
 
 }

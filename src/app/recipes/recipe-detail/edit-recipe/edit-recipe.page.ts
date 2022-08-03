@@ -7,7 +7,6 @@ import { CategoryService } from '../../categories.service';
 import { Category } from '../../category.model';
 import { Ingredient } from '../../ingredient.model';
 
-
 @Component({
   selector: 'app-edit-recipe',
   templateUrl: './edit-recipe.page.html',
