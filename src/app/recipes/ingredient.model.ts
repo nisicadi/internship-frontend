@@ -1,7 +1,7 @@
 import { Recipe } from './recipe.model';
 
 export interface Ingredient {
-    ingredientID: number;
+    ingredientId: number;
     ingredientName: string;
     quantity: number;
     recipeID: number;

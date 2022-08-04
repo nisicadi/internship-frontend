@@ -46,7 +46,16 @@ export class NewRecipePage implements OnInit {
         //Add new recipe
         this.pageTitle = 'Add recipe';
         this.isEditPage = false;
-        this.loadedRecipe = null;
+        const newRecipe: Recipe = {
+          recipeId: 0,
+          recipeTitle: '',
+          imageUrl: '',
+          categoryId: 0,
+          category: null,
+          ingredients: []
+        };
+
+        this.loadedRecipe = newRecipe;
       }
       else{
         //Edit existing recipe
@@ -59,6 +68,7 @@ export class NewRecipePage implements OnInit {
           this.recipeName = this.loadedRecipe?.recipeTitle;
           this.recipeUrl = this.loadedRecipe?.imageUrl;
           this.cat = this.loadedRecipe?.categoryId;
+          this.selectedCategory = this.loadedRecipe?.category;
           this.ingredients = this.loadedRecipe?.ingredients;
         });
       }
@@ -71,7 +81,6 @@ export class NewRecipePage implements OnInit {
   }
 
   discardChanges() {
-    console.log('testRouter');
     this.router.navigate(['../']);
   }
 
@@ -93,8 +102,9 @@ export class NewRecipePage implements OnInit {
       }
 
     this.loadedRecipe.recipeTitle = this.recipeName;
-    this.loadedRecipe.imageUrl = this.recipeName;
-    this.categoryService.getCategory(this.selectedCategory?.categoryId).subscribe(res=>{
+    this.loadedRecipe.imageUrl = this.recipeUrl;
+    this.loadedRecipe.ingredients = this.ingredients;
+    this.categoryService.getCategory(this.cat).subscribe(res=>{
       this.loadedRecipe.category = res;
       this.loadedRecipe.categoryId = res.categoryId;
 
@@ -112,17 +122,29 @@ export class NewRecipePage implements OnInit {
   }
 
   saveIngredient(){
+    if(!this.ingName || !this.ingName.trim() || this.ingName.length > 50
+    || this.ingQuantity <= 0)
+    {
+      this.alertCtrl.create({
+        header: 'Invalid inputs',
+        message: 'Check your inputs and try again.',
+        buttons: ['OK']
+      }).then(alertEl => {
+        alertEl.present();
+      });
+
+      return;
+    }
+
     const newIngredient: Ingredient = {
       ingredientName: this.ingName,
       quantity: this.ingQuantity,
-      ingredientID: 0,
+      ingredientId: 0,
       recipeID: 0,
       recipe: null
     };
 
     this.ingredients?.push(newIngredient);
-    console.log(newIngredient);
-    console.log(this.ingredients);
     this.isModalOpen=false;
   }
 

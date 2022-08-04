@@ -30,8 +30,35 @@
       <ion-item *ngFor="let ing of loadedRecipe?.ingredients">
         <ion-label class="ion-margin">{{ing?.ingredientName}}</ion-label>
         <ion-label class="ion-margin">{{ing?.quantity}}</ion-label>
-        <ion-button (click)="editIngredient()"><ion-icon name="pencil-outline"></ion-icon></ion-button>
-        <ion-button (click)="deleteIngredient()"><ion-icon name="trash" slot="icon-only"></ion-icon></ion-button>
+
+        <ion-modal [isOpen]="isModalOpen">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>New ingredient</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="setOpen(false)">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <ion-item>
+                <ion-label position="floating">Ingredient name</ion-label>
+                <ion-input [(ngModel)]="ingName"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Quantity:</ion-label>
+                <ion-input [(ngModel)]="ingQuantity" type="number"></ion-input>
+              </ion-item>
+              <ion-col>
+                <ion-button expand="block" (click)="saveIngredient(ing)">Submit</ion-button>
+              </ion-col>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+
+        <ion-button (click)="editIngredient(ing)"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+        <ion-button (click)="deleteIngredient(ing)"><ion-icon name="trash" slot="icon-only"></ion-icon></ion-button>
       </ion-item>
     </ion-col>
   </ion-grid>
