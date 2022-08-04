@@ -8,4 +8,5 @@ export interface Recipe {
   categoryId: number;
   category: Category;
   ingredients: Ingredient[];
+  recipePrice: number;
 }

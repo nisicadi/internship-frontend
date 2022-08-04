@@ -19,6 +19,7 @@ export class NewRecipePage implements OnInit {
   ingName: string;
   ingQuantity: number;
   cat: number;
+  recipePrice: number;
   isEditPage: boolean;
   isModalOpen: boolean;
   categories: Category[];
@@ -52,7 +53,8 @@ export class NewRecipePage implements OnInit {
           imageUrl: '',
           categoryId: 0,
           category: null,
-          ingredients: []
+          ingredients: [],
+          recipePrice: 0
         };
 
         this.loadedRecipe = newRecipe;
@@ -70,6 +72,7 @@ export class NewRecipePage implements OnInit {
           this.cat = this.loadedRecipe?.categoryId;
           this.selectedCategory = this.loadedRecipe?.category;
           this.ingredients = this.loadedRecipe?.ingredients;
+          this.recipePrice = this.loadedRecipe?.recipePrice;
         });
       }
   });
@@ -104,6 +107,7 @@ export class NewRecipePage implements OnInit {
     this.loadedRecipe.recipeTitle = this.recipeName;
     this.loadedRecipe.imageUrl = this.recipeUrl;
     this.loadedRecipe.ingredients = this.ingredients;
+    this.loadedRecipe.recipePrice = this.recipePrice;
     this.categoryService.getCategory(this.cat).subscribe(res=>{
       this.loadedRecipe.category = res;
       this.loadedRecipe.categoryId = res.categoryId;
