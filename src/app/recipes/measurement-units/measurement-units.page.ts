@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { MeasurementUnit } from '../measurement-unit.model';
 import { MeasurementUnitService } from '../measurement-unit.service';
+import { NewMeasurementUnitComponent } from '../new-measurement-unit/new-measurement-unit.component';
 
 @Component({
   selector: 'app-measurement-units',
@@ -11,8 +12,6 @@ import { MeasurementUnitService } from '../measurement-unit.service';
 export class MeasurementUnitsPage implements OnInit {
   measurementUnits: MeasurementUnit[];
   isModalOpen: boolean;
-  mu: string;
-  muName: string;
 
   constructor(
     private measurementUnitService: MeasurementUnitService,
@@ -26,12 +25,12 @@ export class MeasurementUnitsPage implements OnInit {
   }
 
   setOpen(bool: boolean) {
-    this.isModalOpen= bool;
+    this.isModalOpen = bool;
   }
 
-  saveMeasurementUnit() {
-    if(!this.mu || !this.mu.trim() || this.mu.length > 2
-    || !this.muName || !this.muName.trim() || this.muName.length > 50)
+  saveMeasurementUnit(mu: string, muName: string) {
+    if(!mu || !mu.trim() || mu.length > 2
+    || !muName || !muName.trim() || muName.length > 50)
     {
       this.alertCtrl.create({
         header: 'Invalid inputs',
@@ -45,8 +44,8 @@ export class MeasurementUnitsPage implements OnInit {
     }
 
     const newMU: MeasurementUnit = {
-      measurement: this.mu,
-      measurementLong: this.muName,
+      measurement: mu,
+      measurementLong: muName,
       measurementId: 0,
       foodstuffs: null
     };
@@ -54,8 +53,9 @@ export class MeasurementUnitsPage implements OnInit {
     this.measurementUnitService.addMeasurementUnit(newMU).subscribe(res=>{
       this.ngOnInit();
     });
+
     this.isModalOpen = false;
-    this.mu = null;
-    this.muName = null;
+    mu = null;
+    muName = null;
   }
 }

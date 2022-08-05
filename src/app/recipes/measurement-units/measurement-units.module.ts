@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MeasurementUnitsPageRoutingModule } from './measurement-units-routing.module';
 
 import { MeasurementUnitsPage } from './measurement-units.page';
+import { NewMeasurementUnitComponent } from '../new-measurement-unit/new-measurement-unit.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { MeasurementUnitsPage } from './measurement-units.page';
     IonicModule,
     MeasurementUnitsPageRoutingModule
   ],
-  declarations: [MeasurementUnitsPage]
+  declarations: [MeasurementUnitsPage, NewMeasurementUnitComponent]
 })
 export class MeasurementUnitsPageModule {}
