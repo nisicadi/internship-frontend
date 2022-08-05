@@ -78,13 +78,12 @@ export class RecipeDetailPage implements OnInit {
   editIngredient(ingredient: Ingredient) {
     this.isModalOpen = true;
 
-    this.ingName = ingredient.ingredientName;
+    //this.ingName = ingredient.ingredientName;
     this.ingQuantity = ingredient.quantity;
   }
 
   saveIngredient(ingredient: Ingredient) {
-    if(!ingredient.ingredientName || !ingredient.ingredientName.trim() || ingredient.ingredientName.length > 50
-    || ingredient.quantity <= 0)
+    if( ingredient.quantity <= 0)
     {
       this.alertCtrl.create({
         header: 'Invalid inputs',
@@ -97,7 +96,7 @@ export class RecipeDetailPage implements OnInit {
       return;
     }
 
-    ingredient.ingredientName = this.ingName;
+    //ingredient.ingredientName = this.ingName;
     ingredient.quantity = this.ingQuantity;
 
     this.ingredientService.updateIngredient(ingredient).subscribe();

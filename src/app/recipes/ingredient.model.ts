@@ -1,8 +1,10 @@
+import { Foodstuff } from './foodstuff.model';
 import { Recipe } from './recipe.model';
 
 export interface Ingredient {
     ingredientId: number;
-    ingredientName: string;
+    foodstuffId: number;
+    foodstuff: Foodstuff;
     quantity: number;
     recipeID: number;
     recipe: Recipe;

@@ -1,12 +1,17 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Recipes</ion-title>
-    <ion-button slot="end" class="ion-margin" [routerLink]="['/recipes/new-recipe']"><ion-icon name="add-outline"></ion-icon></ion-button>
+    <ion-button slot="end" class="ion-margin-end" [routerLink]="['/recipes/measurement-units']"><ion-icon name="scale-outline"></ion-icon></ion-button>
+    <ion-button slot="end" class="ion-margin-end" ><ion-icon name="reader-outline"></ion-icon></ion-button>
+    <ion-button slot="end" class="ion-margin-end" [routerLink]="['/recipes/new-recipe']"><ion-icon name="add-outline"></ion-icon></ion-button> 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-searchbar (ionChange)="getSearch()" [(ngModel)]="searchInput"></ion-searchbar>
+  <ion-chip outline color="secondary" (click)="refreshList()">
+    <ion-label>All categories</ion-label>
+  </ion-chip>
   <app-category-chip 
     *ngFor="let category of categories" 
     [categoryItem]="category">

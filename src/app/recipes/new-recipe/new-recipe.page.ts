@@ -141,10 +141,11 @@ export class NewRecipePage implements OnInit {
     }
 
     const newIngredient: Ingredient = {
-      ingredientName: this.ingName,
       quantity: this.ingQuantity,
       ingredientId: 0,
       recipeID: 0,
+      foodstuffId: 0,
+      foodstuff: null,
       recipe: null
     };
 

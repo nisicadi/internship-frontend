@@ -14,7 +14,11 @@ const routes: Routes = [
   },
   {
     path: 'new-recipe',
-    loadChildren: () => import('./new-recipe/new-recipe.module').then( m => m.NewRecipePageModule)  }
+    loadChildren: () => import('./new-recipe/new-recipe.module').then( m => m.NewRecipePageModule)  },
+  {
+    path: 'measurement-units',
+    loadChildren: () => import('./measurement-units/measurement-units.module').then( m => m.MeasurementUnitsPageModule)
+  }
 ];
 
 @NgModule({
