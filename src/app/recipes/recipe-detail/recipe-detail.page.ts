@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Foodstuff } from '../foodstuff.model';
+import { FoodstuffService } from '../foodstuff.service';
 import { Ingredient } from '../ingredient.model';
 import { IngredientsService } from '../ingredients.service';
 import { Recipe } from '../recipe.model';
@@ -16,13 +18,17 @@ export class RecipeDetailPage implements OnInit {
   ingName: string;
   ingQuantity: number;
   isModalOpen: boolean;
+  fs: number;
+  editedIngredient: Ingredient;
+  foodstuffs: Foodstuff[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private recipeService: RecipesService,
     private router: Router,
     private alertCtrl: AlertController,
-    private ingredientService: IngredientsService
+    private ingredientService: IngredientsService,
+    private foodstuffService: FoodstuffService
     ) { }
 
   ngOnInit() {
@@ -36,9 +42,20 @@ export class RecipeDetailPage implements OnInit {
           return;
         }
 
+        this.foodstuffService.getAllFoodstuff().subscribe(res=>{
+          this.foodstuffs = res;
+        });
+
         const recipeId = paraMap.get('recipeId');
         this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
           this.loadedRecipe = res;
+          console.log(this.loadedRecipe);
+
+          this.loadedRecipe?.ingredients.forEach(element => {
+            this.foodstuffService.getFoodstuff(element.foodstuffId).subscribe(res2 =>{
+                element.foodstuff = res2;
+              });
+          });
         });
       });
     });
@@ -78,12 +95,14 @@ export class RecipeDetailPage implements OnInit {
   editIngredient(ingredient: Ingredient) {
     this.isModalOpen = true;
 
-    //this.ingName = ingredient.ingredientName;
-    this.ingQuantity = ingredient.quantity;
+    this.fs = ingredient?.foodstuff?.foodstuffId;
+    this.ingQuantity = ingredient?.quantity;
+    //Bez ovog se editovanje bilo kojeg ingredienta, nakon saveChanges(), odnosilo samo na zadnji ingredient u nizu
+    this.editedIngredient = ingredient;
   }
 
-  saveIngredient(ingredient: Ingredient) {
-    if( ingredient.quantity <= 0)
+  saveIngredient() {
+    if( this.editedIngredient.quantity <= 0)
     {
       this.alertCtrl.create({
         header: 'Invalid inputs',
@@ -96,11 +115,15 @@ export class RecipeDetailPage implements OnInit {
       return;
     }
 
-    //ingredient.ingredientName = this.ingName;
-    ingredient.quantity = this.ingQuantity;
+    this.editedIngredient.foodstuffId = this.fs;
+    this.foodstuffService.getFoodstuff(this.fs).subscribe(res => {
+      this.editedIngredient.foodstuff = res;
 
-    this.ingredientService.updateIngredient(ingredient).subscribe();
-    this.isModalOpen = false;
+      this.editedIngredient.quantity = this.ingQuantity;
+
+      this.ingredientService.updateIngredient(this.editedIngredient).subscribe();
+      this.isModalOpen = false;
+    });
   }
 
   deleteIngredient(ingredient: Ingredient) {
@@ -127,4 +150,7 @@ export class RecipeDetailPage implements OnInit {
   });
   }
 
+  foodstuffChanged(ev){
+    this.fs = ev.target.value;
+  }
 }

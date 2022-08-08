@@ -43,15 +43,18 @@
             </ion-header>
             <ion-content class="ion-padding">
               <ion-item>
-                <ion-label position="floating">Ingredient name</ion-label>
-                <ion-input [(ngModel)]="ingName"></ion-input>
+                <ion-select placeholder="Select Ingredient" (ionChange)="foodstuffChanged($event)" [(ngModel)]="fs">
+                  <ion-select-option 
+                  *ngFor="let foodstuff of foodstuffs"
+                   [value]="foodstuff?.foodstuffId">{{foodstuff?.foodstuffName}}</ion-select-option>
+                </ion-select>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Quantity:</ion-label>
                 <ion-input [(ngModel)]="ingQuantity" type="number"></ion-input>
               </ion-item>
               <ion-col>
-                <ion-button expand="block" (click)="saveIngredient(ing)">Submit</ion-button>
+                <ion-button expand="block" (click)="saveIngredient()">Submit</ion-button>
               </ion-col>
             </ion-content>
           </ng-template>

@@ -15,13 +15,31 @@ export class FoodstuffPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.foodstuffService.getAllFoodstuff().subscribe(res=>{
-      this.foodstuffs = res;
+    this.refreshList();
+  }
+  saveFoodstuff(fsName: string, muId: number) {
+    const tempFS: Foodstuff = {
+      foodstuffId: 0,
+      foodstuffName: fsName,
+      measurementId: muId,
+      measurement: null,
+      ingredients: []
+    };
+
+    this.foodstuffService?.addFoodstuff(tempFS).subscribe(res=>{
+      this.refreshList();
     });
+
+    this.setOpen(false);
   }
 
   setOpen(bool: boolean) {
     this.isModalOpen = bool;
   }
 
+  refreshList() {
+    this.foodstuffService.getAllFoodstuff().subscribe(res=>{
+      this.foodstuffs = res;
+    });
+  }
 }

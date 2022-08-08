@@ -6,6 +6,8 @@ import { AlertController } from '@ionic/angular';
 import { CategoryService } from '../categories.service';
 import { Category } from '../category.model';
 import { Ingredient } from '../ingredient.model';
+import { Foodstuff } from '../foodstuff.model';
+import { FoodstuffService } from '../foodstuff.service';
 
 @Component({
   selector: 'app-new-recipe',
@@ -16,15 +18,17 @@ export class NewRecipePage implements OnInit {
   pageTitle: string;
   recipeName: string;
   recipeUrl: string;
-  ingName: string;
   ingQuantity: number;
   cat: number;
+  fs: number;
   recipePrice: number;
   isEditPage: boolean;
   isModalOpen: boolean;
   categories: Category[];
   ingredients: any=[];
+  foodstuffs: Foodstuff[];
 
+  selectedFoodstuff: Foodstuff;
   selectedCategory: Category;
   loadedRecipe: Recipe;
 
@@ -33,12 +37,17 @@ export class NewRecipePage implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private alertCtrl: AlertController,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private foodstuffService: FoodstuffService
     ) { }
 
     ngOnInit() {
       this.categoryService.getAllCategories().subscribe(res=>{
         this.categories = res;
+      });
+
+      this.foodstuffService.getAllFoodstuff().subscribe(res=> {
+        this.foodstuffs = res;
       });
 
       this.activatedRoute.paramMap.subscribe(paraMap => {
@@ -66,6 +75,11 @@ export class NewRecipePage implements OnInit {
         const recipeId = paraMap.get('recipeId');
         this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
           this.loadedRecipe = res;
+          this.loadedRecipe.ingredients.forEach(element => {
+            this.foodstuffService.getFoodstuff(element.foodstuffId).subscribe(res2 => {
+              element.foodstuff = res2;
+            });
+          });
 
           this.recipeName = this.loadedRecipe?.recipeTitle;
           this.recipeUrl = this.loadedRecipe?.imageUrl;
@@ -103,7 +117,7 @@ export class NewRecipePage implements OnInit {
 
         return;
       }
-
+    console.log(this.ingredients);
     this.loadedRecipe.recipeTitle = this.recipeName;
     this.loadedRecipe.imageUrl = this.recipeUrl;
     this.loadedRecipe.ingredients = this.ingredients;
@@ -126,8 +140,7 @@ export class NewRecipePage implements OnInit {
   }
 
   saveIngredient(){
-    if(!this.ingName || !this.ingName.trim() || this.ingName.length > 50
-    || this.ingQuantity <= 0)
+    if(this.ingQuantity <= 0)
     {
       this.alertCtrl.create({
         header: 'Invalid inputs',
@@ -143,9 +156,9 @@ export class NewRecipePage implements OnInit {
     const newIngredient: Ingredient = {
       quantity: this.ingQuantity,
       ingredientId: 0,
+      foodstuff: this.selectedFoodstuff,
+      foodstuffId: this.selectedFoodstuff?.foodstuffId,
       recipeID: 0,
-      foodstuffId: 0,
-      foodstuff: null,
       recipe: null
     };
 
@@ -155,5 +168,9 @@ export class NewRecipePage implements OnInit {
 
   categoryChanged(ev){
     this.selectedCategory = ev.target.value;
+  }
+
+  foodstuffChanged(ev){
+    this.selectedFoodstuff = ev.target.value;
   }
 }
