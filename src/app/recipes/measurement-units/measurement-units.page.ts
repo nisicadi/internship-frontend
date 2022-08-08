@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { MeasurementUnit } from '../measurement-unit.model';
 import { MeasurementUnitService } from '../measurement-unit.service';
-import { NewMeasurementUnitComponent } from '../new-measurement-unit/new-measurement-unit.component';
 
 @Component({
   selector: 'app-measurement-units',

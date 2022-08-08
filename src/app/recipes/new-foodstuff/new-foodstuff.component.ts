@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodstuffService } from '../foodstuff.service';
 import { FoodstuffPage } from '../foodstuff/foodstuff.page';
 import { Ingredient } from '../ingredient.model';
 import { IngredientsService } from '../ingredients.service';
@@ -34,16 +33,6 @@ export class NewFoodstuffComponent implements OnInit {
   }
 
   saveFoodstuff() {
-    // const tempFS: Foodstuff = {
-    //   foodstuffId: 0,
-    //   foodstuffName: this.fsName,
-    //   measurementId: this.muId,
-    //   measurement: null,
-    //   ingredients: []
-    // };
-
-    // this.foodstuffService?.addFoodstuff(tempFS).subscribe();
-    // this.foodStuffPage.setOpen(false);
     //Refresh fix je da se u FoodstuffPage pozove save funkcija, kao sto je urađeno za MeasurementUnit page
     this.foodStuffPage.saveFoodstuff(this.fsName, this.muId);
     this.fsName = '';

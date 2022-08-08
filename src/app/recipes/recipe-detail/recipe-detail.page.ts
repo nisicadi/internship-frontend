@@ -49,7 +49,6 @@ export class RecipeDetailPage implements OnInit {
         const recipeId = paraMap.get('recipeId');
         this.recipeService.getRecipe(Number(recipeId)).subscribe((res) => {
           this.loadedRecipe = res;
-          console.log(this.loadedRecipe);
 
           this.loadedRecipe?.ingredients.forEach(element => {
             this.foodstuffService.getFoodstuff(element.foodstuffId).subscribe(res2 =>{

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { RecipesService } from './recipes.service';
-import { ActivatedRoute } from '@angular/router';
 import { Category } from './category.model';
 import { CategoryService } from './categories.service';
 
@@ -18,7 +17,9 @@ export class RecipesPage implements OnInit {
   searchInput: string;
   lastCategory: Category;
 
-  constructor(private recipesService: RecipesService, private activatedRoute: ActivatedRoute, private categoryService: CategoryService) { }
+  constructor(private recipesService: RecipesService,
+    private categoryService: CategoryService
+    ) { }
 
   ngOnInit() {
   }
