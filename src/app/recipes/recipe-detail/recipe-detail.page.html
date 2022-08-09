@@ -26,10 +26,12 @@
       <ion-item>
         <ion-label>Ingredient name:</ion-label>
         <ion-label>Ingredient quantity:</ion-label>
+        <ion-label>Measurement unit</ion-label>
       </ion-item>
       <ion-item *ngFor="let ing of loadedRecipe?.ingredients">
         <ion-label class="ion-margin">{{ing?.foodstuff?.foodstuffName}}</ion-label>
         <ion-label class="ion-margin">{{ing?.quantity}}</ion-label>
+        <ion-label class="ion-margin">{{ing?.foodstuff?.measurement?.measurement}}</ion-label>
 
         <ion-modal [isOpen]="isModalOpen">
           <ng-template>

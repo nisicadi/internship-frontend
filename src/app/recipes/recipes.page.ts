@@ -17,7 +17,8 @@ export class RecipesPage implements OnInit {
   searchInput: string;
   lastCategory: Category;
 
-  constructor(private recipesService: RecipesService,
+  constructor(
+    private recipesService: RecipesService,
     private categoryService: CategoryService
     ) { }
 

@@ -5,6 +5,7 @@ import { Foodstuff } from '../foodstuff.model';
 import { FoodstuffService } from '../foodstuff.service';
 import { Ingredient } from '../ingredient.model';
 import { IngredientsService } from '../ingredients.service';
+import { MeasurementUnitService } from '../measurement-unit.service';
 import { Recipe } from '../recipe.model';
 import { RecipesService } from '../recipes.service';
 
@@ -28,7 +29,8 @@ export class RecipeDetailPage implements OnInit {
     private router: Router,
     private alertCtrl: AlertController,
     private ingredientService: IngredientsService,
-    private foodstuffService: FoodstuffService
+    private foodstuffService: FoodstuffService,
+    private measurementUnitService: MeasurementUnitService
     ) { }
 
   ngOnInit() {
@@ -53,6 +55,9 @@ export class RecipeDetailPage implements OnInit {
           this.loadedRecipe?.ingredients.forEach(element => {
             this.foodstuffService.getFoodstuff(element.foodstuffId).subscribe(res2 =>{
                 element.foodstuff = res2;
+                this.measurementUnitService.getMeasurementUnit(element.foodstuff.measurementId).subscribe(res3=>{
+                  element.foodstuff.measurement = res3;
+                });
               });
           });
         });
