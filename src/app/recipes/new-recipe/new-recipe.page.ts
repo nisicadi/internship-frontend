@@ -18,6 +18,7 @@ export class NewRecipePage implements OnInit {
   pageTitle: string;
   recipeName: string;
   recipeUrl: string;
+  description: string;
   ingQuantity: number;
   cat: number;
   fs: number;
@@ -63,7 +64,8 @@ export class NewRecipePage implements OnInit {
           categoryId: 0,
           category: null,
           ingredients: [],
-          recipePrice: 0
+          recipePrice: 0,
+          recipeDescription: ''
         };
 
         this.loadedRecipe = newRecipe;
@@ -87,6 +89,7 @@ export class NewRecipePage implements OnInit {
           this.selectedCategory = this.loadedRecipe?.category;
           this.ingredients = this.loadedRecipe?.ingredients;
           this.recipePrice = this.loadedRecipe?.recipePrice;
+          this.description = this.loadedRecipe?.recipeDescription;
         });
       }
   });
@@ -103,8 +106,8 @@ export class NewRecipePage implements OnInit {
 
   saveChanges() {
       //Validate input values
-      if(!this.recipeName || !this.recipeUrl ||
-        !this.recipeName.trim() || !this.recipeUrl.trim() ||
+      if(!this.recipeName || !this.recipeUrl || !this.description ||
+        !this.recipeName.trim() || !this.recipeUrl.trim() || !this.description.trim() ||
         this.recipeName.length > 255 || this.recipeUrl.length > 255)
       {
         this.alertCtrl.create({
@@ -117,11 +120,11 @@ export class NewRecipePage implements OnInit {
 
         return;
       }
-    console.log(this.ingredients);
     this.loadedRecipe.recipeTitle = this.recipeName;
     this.loadedRecipe.imageUrl = this.recipeUrl;
     this.loadedRecipe.ingredients = this.ingredients;
     this.loadedRecipe.recipePrice = this.recipePrice;
+    this.loadedRecipe.recipeDescription = this.description;
     this.categoryService.getCategory(this.cat).subscribe(res=>{
       this.loadedRecipe.category = res;
       this.loadedRecipe.categoryId = res.categoryId;
