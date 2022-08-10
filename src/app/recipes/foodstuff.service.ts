@@ -22,8 +22,13 @@ export class FoodstuffService {
     return this.http.delete<Foodstuff>(`${this.url}/${foodstuff.foodstuffId}`);
   }
 
-  addFoodstuff(foodstuff: Foodstuff): Observable<Foodstuff> {
-    return this.http.post<Foodstuff>(`${this.url}`, foodstuff);
+  addFoodstuff(foodstuff: Foodstuff, minValue: number): Observable<any> {
+    console.log(minValue);
+    const data = {
+      foodstuff,
+      minValue
+    };
+    return this.http.post<any>(`${this.url}`, data);
   }
 
   updateFoodstuff(foodstuff: Foodstuff): Observable<Foodstuff> {

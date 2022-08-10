@@ -17,7 +17,7 @@ export class FoodstuffPage implements OnInit {
   ngOnInit() {
     this.refreshList();
   }
-  saveFoodstuff(fsName: string, muId: number) {
+  saveFoodstuff(fsName: string, muId: number, minValue: number) {
     const tempFS: Foodstuff = {
       foodstuffId: 0,
       foodstuffName: fsName,
@@ -25,8 +25,8 @@ export class FoodstuffPage implements OnInit {
       measurement: null,
       ingredients: []
     };
-
-    this.foodstuffService?.addFoodstuff(tempFS).subscribe(res=>{
+    console.log(minValue);
+    this.foodstuffService?.addFoodstuff(tempFS, Number(minValue)).subscribe(res=>{
       this.refreshList();
     });
 

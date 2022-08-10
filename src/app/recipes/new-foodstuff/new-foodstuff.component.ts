@@ -16,6 +16,7 @@ export class NewFoodstuffComponent implements OnInit {
   muId: number;
   measurements: MeasurementUnit[];
   ingredients: Ingredient[];
+  minValue: number;
 
   constructor(
     private measurementUnitService: MeasurementUnitService,
@@ -34,9 +35,10 @@ export class NewFoodstuffComponent implements OnInit {
 
   saveFoodstuff() {
     //Refresh fix je da se u FoodstuffPage pozove save funkcija, kao sto je urađeno za MeasurementUnit page
-    this.foodStuffPage.saveFoodstuff(this.fsName, this.muId);
+    this.foodStuffPage.saveFoodstuff(this.fsName, this.muId, this.minValue);
     this.fsName = '';
     this.muId = null;
+    this.minValue = null;
   }
 
   categoryChanged(ev){

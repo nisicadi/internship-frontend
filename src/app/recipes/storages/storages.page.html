@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Storages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-row>
+  <ion-col>
+    <ion-label class="ion-margin-start">Foodstuff name</ion-label>
+  </ion-col>
+  <ion-col>
+    <ion-label class="ion-margin-start">Min quantity</ion-label>
+  </ion-col>
+  <ion-col>
+    <ion-label class="ion-margin-start">Quantity</ion-label>
+  </ion-col>
+</ion-row>
+<ion-row *ngFor="let storage of storages">
+  <ion-col>
+    <ion-item>{{storage?.foodstuff?.foodstuffName}}</ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item>{{storage?.minQuantity}}</ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item>{{storage?.quantity}}</ion-item>
+  </ion-col>
+</ion-row>
+</ion-content>
