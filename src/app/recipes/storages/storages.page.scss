@@ -1,0 +1,17 @@
+:root {
+	--ion-color-babyred: #ffcccb;
+	--ion-color-babyred-rgb: 255,204,203;
+	--ion-color-babyred-contrast: #000000;
+	--ion-color-babyred-contrast-rgb: 0,0,0;
+	--ion-color-babyred-shade: #e0b4b3;
+	--ion-color-babyred-tint: #ffd1d0;
+}
+
+.ion-color-babyred {
+	--ion-color-base: var(--ion-color-babyred);
+	--ion-color-base-rgb: var(--ion-color-babyred-rgb);
+	--ion-color-contrast: var(--ion-color-babyred-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-babyred-contrast-rgb);
+	--ion-color-shade: var(--ion-color-babyred-shade);
+	--ion-color-tint: var(--ion-color-babyred-tint);
+}

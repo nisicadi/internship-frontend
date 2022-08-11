@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'storages',
     loadChildren: () => import('./storages/storages.module').then( m => m.StoragesPageModule)
+  },
+  {
+    path: 'storage-input',
+    loadChildren: () => import('./storage-input/storage-input.module').then( m => m.StorageInputPageModule)
   }
 ];
 

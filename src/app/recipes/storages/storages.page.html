@@ -21,13 +21,13 @@
 </ion-row>
 <ion-row *ngFor="let storage of storages">
   <ion-col>
-    <ion-item>{{storage?.foodstuff?.foodstuffName}}</ion-item>
+    <ion-item [color]="!storage.underMin ? '' : 'babyred'">{{storage?.foodstuff?.foodstuffName}}</ion-item>
   </ion-col>
   <ion-col>
-    <ion-item>{{storage?.minQuantity}}</ion-item>
+    <ion-item [color]="!storage.underMin ? '' : 'babyred'">{{storage?.minQuantity}}</ion-item>
   </ion-col>
   <ion-col>
-    <ion-item>{{storage?.quantity}}</ion-item>
+    <ion-item [color]="!storage.underMin ? '' : 'babyred'">{{storage?.quantity}}</ion-item>
   </ion-col>
 </ion-row>
 </ion-content>

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Storage input</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Foodstuff:</ion-label>
+      <ion-select placeholder="Select foodstuff" (ionChange)="foodstuffChanged($event)" [(ngModel)]="selectedFoodstuff">
+        <ion-select-option 
+        *ngFor="let foodstuff of foodstuffs"
+         [value]="foodstuff?.foodstuffId">{{foodstuff?.foodstuffName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <ion-label position="floating">Quantity</ion-label>
+    <ion-input [(ngModel)]="ingQuantity" type="number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-checkbox checked slot="start"></ion-checkbox>
+    <ion-label>Remove quantity?</ion-label>
+  </ion-item>
+  <ion-button (click)="discardChanges()"><ion-icon name="close-outline"></ion-icon></ion-button>
+  <ion-button (click)="saveChanges()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
+</ion-content>
