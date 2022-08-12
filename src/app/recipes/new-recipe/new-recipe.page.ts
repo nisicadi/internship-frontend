@@ -129,6 +129,7 @@ export class NewRecipePage implements OnInit {
       this.loadedRecipe.category = res;
       this.loadedRecipe.categoryId = res.categoryId;
 
+      console.log(this.loadedRecipe);
       if(this.isEditPage){
         this.recipeService.updateRecipe(this.loadedRecipe).subscribe(res2=>{
           this.router.navigate([`/recipes/`+this.loadedRecipe.recipeId]);
@@ -165,7 +166,8 @@ export class NewRecipePage implements OnInit {
       recipe: null
     };
 
-    this.ingredients?.push(newIngredient);
+    this.loadedRecipe?.ingredients.push(newIngredient);
+    console.log(this.loadedRecipe?.ingredients);
     this.isModalOpen=false;
   }
 

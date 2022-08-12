@@ -14,6 +14,7 @@ export class StorageInputPage implements OnInit {
   foodstuffs: Foodstuff[];
   ingQuantity: number;
   selectedFoodstuff: number;
+  removeQuantity: boolean;
 
   constructor(
     private foodstuffService: FoodstuffService,
@@ -37,7 +38,8 @@ export class StorageInputPage implements OnInit {
         storageInputId: 0,
         quantity: this.ingQuantity,
         foodstuff: res,
-        foodstuffId: res.foodstuffId
+        foodstuffId: res.foodstuffId,
+        removeQuantity: this.removeQuantity
       };
       this.storageInputService.addStorageInput(newStorageInput).subscribe();
     });

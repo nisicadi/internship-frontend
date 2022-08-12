@@ -23,7 +23,7 @@
     <ion-input [(ngModel)]="ingQuantity" type="number"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-checkbox checked slot="start"></ion-checkbox>
+    <ion-checkbox checked slot="start" [(ngModel)]="removeQuantity"></ion-checkbox>
     <ion-label>Remove quantity?</ion-label>
   </ion-item>
   <ion-button (click)="discardChanges()"><ion-icon name="close-outline"></ion-icon></ion-button>

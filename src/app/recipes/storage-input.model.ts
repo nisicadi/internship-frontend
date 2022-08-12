@@ -5,4 +5,5 @@ export interface StorageInput {
     foodstuffId: number;
     quantity: number;
     foodstuff: Foodstuff;
+    removeQuantity: boolean;
 }
