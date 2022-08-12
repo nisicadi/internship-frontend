@@ -33,6 +33,11 @@ export class StorageInputPage implements OnInit {
   }
 
   saveChanges() {
+    if(this.ingQuantity < 0)
+    {
+      return;
+    }
+
     this.foodstuffService.getFoodstuff(this.selectedFoodstuff).subscribe(res=>{
       const newStorageInput: StorageInput = {
         storageInputId: 0,
